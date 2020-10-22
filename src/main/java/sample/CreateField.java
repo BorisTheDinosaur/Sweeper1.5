@@ -4,14 +4,17 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 
 public class CreateField {
-    private static int countTrueFlags = 0;
-    private int countBombs = 0;
-    private int countFlags = 0;
     private static Tile[][] matrix;
     private Label num = new Label("0");
     private Timer time;
 
-    public CreateField(int tileWidth, int tileHeight, double rand, BorderPane root) {
+    public CreateField(FieldInf pack,  CountInf count) {
+        int tileWidth = pack.getTileWidth();
+        int tileHeight = pack.getTileHeight();
+        double rand = pack.getRand();
+        BorderPane root = pack.getRoot();
+        int countBombs = 0;
+
         matrix = new Tile[tileWidth][tileHeight];
 
         for (int j = 0; j < tileHeight; j++) {
@@ -35,16 +38,7 @@ public class CreateField {
                 tile.getValue().setText(String.valueOf(tile.getBombAround()));
             }
         }
-    }
-
-    public int getCountBombs() {
-        return countBombs;
-    }
-
-    public int getCountTrueFlags() { return countTrueFlags; }
-
-    public int getCountFlags() {
-        return countFlags;
+        count.setCountBombs(countBombs);
     }
 
     public Tile[][] getMatrix() { return matrix; }

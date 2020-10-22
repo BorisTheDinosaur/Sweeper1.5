@@ -18,19 +18,18 @@ public class Create extends Parent {
     private Label num = new Label("0");
     private Timer time;
     private CreateField field;
-    private int width;
-    private int height;
-    private static Tile[][] matrix;
 
 
-    public Create(Stage stage, BorderPane root, int width, int height, double rand) {
-        this.width = width;
-        this.height = height;
+    public Create(FieldInf pack) {
+        Stage stage = pack.getStage();
+        BorderPane root = pack.getRoot();
+        int width = pack.getWidth();
+        int height = pack.getHeight();
 
         stage.setWidth(width + 17);
         stage.setHeight(height + 104);
 
-        root.setPrefSize(width - 9, height + 55);
+      //  root.setPrefSize(width - 9, height + 55);                  //   ???
         root.setBackground(new Background(new BackgroundFill(Color.DIMGREY, CornerRadii.EMPTY, Insets.EMPTY)));
 
 
@@ -42,10 +41,11 @@ public class Create extends Parent {
         root.setRight(time);
         root.setLeft(num);
 
-        field = new CreateField(width/20, height/20, rand, root);
+        CountInf count = new CountInf();
+        field = new CreateField(pack, count);
 
 
-        num.setText(String.valueOf(field.getCountBombs() - field.getCountFlags()));
+        num.setText(String.valueOf(count.getCountBombs() - count.getCountFlags()));
     }
 
     public Timer getTimer() {

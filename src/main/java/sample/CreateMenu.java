@@ -7,22 +7,17 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class CreateMenu extends BorderPane {
-    private static int width = 500;
-    private static int height = 400;
-    private static double rand = 0.2;
     private double a;
     private double b;
     private Create game;
-    private MenuBar menuBar;
+    private final MenuBar menuBar;
 
 
-    public CreateMenu(Stage stage, BorderPane root) {
+    public CreateMenu(FieldInf pack) {
 
-
-        //  titleWidth = width / titleSize;
-        //  titleHeight = height / titleSize;
-        //  Title[][] matrix = new Title[titleWidth][titleHeight];
-
+        BorderPane root = pack.getRoot();
+        pack.setRand(0.2);
+        pack.setWH(500, 400);
 
 
         menuBar = new MenuBar();
@@ -56,19 +51,16 @@ public class CreateMenu extends BorderPane {
         newGameItem.setAccelerator(KeyCombination.keyCombination("Ctrl+N"));
         newGameItem.setOnAction(event -> {
             a = sliderLevel.getValue();
-            if (a == 0.0) rand = 0.1;
-            if (a == 12.5) rand = 0.3;
+            if (a == 0.0) pack.setRand(0.1);
+            else if (a == 12.5) pack.setRand(0.3);
+            else if (a == 6.25) pack.setRand(0.2);
 
             b = sliderResolution.getValue();
-            if (b == 0.0) {
-                width = 300;
-                height = 200;
-            }
-            if (b == 12.5) {
-                width = 700;
-                height = 600;
-            }
-                game = new Create(stage, root, width, height, rand);
+            if (b == 0.0) pack.setWH(300, 200);
+            else if (b == 12.5) pack.setWH(700, 600);
+            else if (b == 6.25) pack.setWH(500, 400);
+
+                game = new Create(pack);
  //           field = new CreateField(width/20, height/20, rand, root);
         });
 
@@ -85,17 +77,6 @@ public class CreateMenu extends BorderPane {
         menuBar.getMenus().addAll(mainMenu);
     }
 
-    public int getWidth1() {
-        return width;
-    }
-
-    public int getHeight1() {
-        return height;
-    }
-
-    public double getRand() {
-        return rand;
-    }
 
     public Create getGame() { return game; }
 

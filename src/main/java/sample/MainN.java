@@ -18,6 +18,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.InputStream;
 import java.util.ArrayList;
 
@@ -29,18 +30,25 @@ public class MainN extends Application {
     public void start(Stage stage) throws  Exception{
         stage.setTitle("Canep");
 
-        //  InputStream ggg = getClass().getClassLoader().getResourceAsStream("sample/Images/iconImage.png");
-        //  Image icon = new Image(ggg);
-        //  stage.getIcons().add(icon);
+      //    InputStream ggg = getClass().getResourceAsStream("src/main/resources/iconImage.png");
+      //    Image icon = new Image(ggg);
+       //   stage.getIcons().add(icon);
+
+        //ImageIcon icon = new ImageIcon("src/main/resources/iconImage.png");
+       // stage.getIcons().add(Image.impl_fromPlatformImage(icon.getImage()));
 
         BorderPane root = new BorderPane();
-        CreateMenu menu = new CreateMenu(stage, root);
+        FieldInf pack = new FieldInf();
+        pack.setSizeTile(20);
+        pack.setRoot(root);
+        pack.setStage(stage);
+        CreateMenu menu = new CreateMenu(pack);
         Create game = menu.getGame();
-        game = new Create(stage, root, menu.getWidth1(), menu.getHeight1(), menu.getRand());
+        game = new Create(pack);
         Scene scene = new Scene(root);
 
         stage.setScene(scene);
-       // stage.setResizable(false);     change stage
+        //stage.setResizable(false);    // change stage
         stage.show();
     }
 

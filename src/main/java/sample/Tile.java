@@ -13,7 +13,7 @@ public class Tile extends StackPane{
     private final int x;
     private final int y;
     private final boolean bomb;
-    private int bombAround = 0;
+    private int bombAround;
     private boolean visible = false;
     private boolean flag = false;
 
@@ -36,8 +36,8 @@ public class Tile extends StackPane{
         setTranslateY(74 + y * 20);
 
         setOnMouseClicked(event -> {
-    //         if (event.getButton().equals(MouseButton.PRIMARY)) see();
-    //         if (event.getButton().equals(MouseButton.SECONDARY)) flagged();
+       //      if (event.getButton().equals(MouseButton.PRIMARY)) see();
+       //      if (event.getButton().equals(MouseButton.SECONDARY)) flagged();
         });
     }
 
@@ -93,7 +93,7 @@ public class Tile extends StackPane{
         value.setVisible(true);
         cube.setFill(Color.BLACK);
         if (value.getText().equals("0")){
-            ListNeighbors list = new ListNeighbors(this, matrix, width, height);
+            ListNeighbors list = new ListNeighbors(this, matrix, tileW, tileH);
             for (Tile neighbor: list.getNeighbors()) {
                 value.setText("");
                 if (neighbor.flag) neighbor.flagged();
