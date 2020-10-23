@@ -1,17 +1,14 @@
-package sample;
+package addpack;
 
 import javafx.application.Platform;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 
 public class CreateMenu extends BorderPane {
     private double a;
     private double b;
     private Create game;
-    private final MenuBar menuBar;
-
 
     public CreateMenu(FieldInf pack) {
 
@@ -19,8 +16,7 @@ public class CreateMenu extends BorderPane {
         pack.setRand(0.2);
         pack.setWH(500, 400);
 
-
-        menuBar = new MenuBar();
+        MenuBar menuBar = new MenuBar();
         root.setTop(menuBar);
 
         Menu mainMenu = new Menu("_Menu");
@@ -46,7 +42,6 @@ public class CreateMenu extends BorderPane {
 
         optionsMenu.getItems().addAll(levelMenu, resolutionMenu);
 
-
         MenuItem newGameItem = new MenuItem("_New Game");
         newGameItem.setAccelerator(KeyCombination.keyCombination("Ctrl+N"));
         newGameItem.setOnAction(event -> {
@@ -61,29 +56,17 @@ public class CreateMenu extends BorderPane {
             else if (b == 6.25) pack.setWH(500, 400);
 
                 game = new Create(pack);
- //           field = new CreateField(width/20, height/20, rand, root);
         });
-
-        MenuItem recordsItem = new MenuItem("_Records");
-        recordsItem.setAccelerator(KeyCombination.keyCombination("Ctrl+R"));
-        recordsItem.setOnAction(event -> {});
 
         MenuItem exitItem = new MenuItem("_Exit");
         exitItem.setAccelerator(KeyCombination.keyCombination("Ctrl+X"));
         exitItem.setOnAction(event -> Platform.exit());
 
-        mainMenu.getItems().addAll(newGameItem, recordsItem, optionsMenu, new SeparatorMenuItem(), exitItem);
+        mainMenu.getItems().addAll(newGameItem, optionsMenu, new SeparatorMenuItem(), exitItem);
 
         menuBar.getMenus().addAll(mainMenu);
     }
 
-
     public Create getGame() { return game; }
 
-    public MenuBar getMenuBar() { return menuBar; }
-
-
-  //  public Tile[][] getMatrix() {
-  //      return matrix;
-  //  }
 }
